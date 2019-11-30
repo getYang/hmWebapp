@@ -2,17 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import 'amfe-flexible/index.js'
-import {
-  Button,
-  Cell,
-  CellGroup
-} from 'vant'
-
-Vue
-  .use(Button)
-  .use(Cell)
-  .use(CellGroup)
+import 'amfe-flexible'
+import './utils/register-vant.js'
+import './styles/index.less'
 
 Vue.config.productionTip = false
 
