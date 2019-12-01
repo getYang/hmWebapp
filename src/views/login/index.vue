@@ -22,15 +22,16 @@
 
     <!-- 登录按钮 -->
     <div class="login-btn-box">
-      <van-button type="info" @click="onLogin">登录</van-button>
+        <van-button color="linear-gradient(to right, #4bb0ff, #6149f6)"  @click="onLogin">登录</van-button>
+      <!-- <van-button type="info">登录</van-button> -->
     </div>
     <!-- /登录按钮 -->
   </div>
 </template>
 
 <script>
-import request from '@/utils/request'
-
+// import request from '@/utils/request'
+import { login } from '@/api/user'
 export default {
   name: 'LoginPage',
   components: {},
@@ -57,12 +58,11 @@ export default {
       })
 
       try {
-        const res = await request({
-          method: 'POST',
-          url: '/app/v1_0/authorizations',
-          data: this.user
-        })
-        console.log('登录成功', res)
+        const res = await login(this.user)
+
+        // res.data.data => { token: 'xxx', refresh_token: 'xxx' }
+        this.$store.commit('setUser', res.data.data)
+
         // 提示 success 或者 fail 的时候，会先把其它的 toast 先清除
         this.$toast.success('登录成功')
       } catch (err) {
